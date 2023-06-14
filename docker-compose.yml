@@ -1,24 +1,24 @@
 version: "3.7"         
 
 services:        
-  localhost:             
+  db:             
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: database
     environment:
       MSSQL_SA_PASSWORD: Un!q@to2023  
-      MSSQL_DATABASE: db_vero_digital     
-      MSSQL_USER: sa
+      # MSSQL_DATABASE: db_vero_digital     
+      ACCEPT_EULA: Y
     networks:
       - salihnet
 
   myapp:
-    image: salihijk/QuickDbTest:latest
+    image: salihijk/quickdbtest:latest
     container_name: myapp
     restart: always
     depends_on:
-      - localhost
+      - db
     ports:
-      - "1443:1443"
+      - "80:80"
     networks:
       - salihnet
 

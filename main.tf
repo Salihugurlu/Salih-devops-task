@@ -74,7 +74,7 @@ resource "aws_instance" "tf-docker-ec2" {
           curl -s --create-dirs -o "/home/ec2-user/QuickDBTest.php/Dockerfile" -L "$FOLDER"Dockerfile
           curl -s --create-dirs -o "/home/ec2-user/QuickDBTest.php/docker-compose.yml" -L "$FOLDER"docker-compose.yml
           cd /home/ec2-user/QuickDBTest.php
-          docker build -t salihijk/QuickDbTest:latest .
+          docker build -t salihijk/quickdbtest:latest .
           docker-compose up -d
           EOF
   # depends_on = [github_repository_file.app-files]
@@ -87,9 +87,9 @@ resource "aws_security_group" "tf-docker-sec-gr" {
     Name = "docker-sec-salihQuickDbTest"
   }
   ingress {
-    from_port   = 1443
+    from_port   = 80
     protocol    = "tcp"
-    to_port     = 1443
+    to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
   }
 

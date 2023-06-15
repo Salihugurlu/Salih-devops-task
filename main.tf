@@ -4,10 +4,6 @@ terraform {
       source = "hashicorp/aws"
       version = "~>4.0"
     }
-    # github = {
-    #   source  = "integrations/github"
-    #   version = "~> 5.0"
-    # }
   }
 }
 
@@ -15,37 +11,6 @@ provider "aws" {
   # Configuration options
   region = "us-east-1"
 }
-
-# provider "github" {
-#   # Configuration options
-#   token = "xxxxxxxxxxxxxxxxxxxx"
-#   # token = "xxxxxxxxxxxxxxxxxxxx"
-# }
-
-# resource "github_repository" "myrepo" {
-#   name = "oliver-repo"
-#   auto_init = true
-#   visibility = "private"
-# }
-
-# resource "github_branch_default" "main" {
-#   branch = "main"
-#   repository = github_repository.myrepo.name
-# }
-
-# variable "files" {
-#   default = ["QuickDBTest.php", "main.tf", "Dockerfile", "docker-compose.yml"]
-# }
-
-# resource "github_repository_file" "app-files" {
-#   for_each = toset(var.files)
-#   content = file(each.value)
-#   file = each.value
-#   repository = github_repository.Salih-devops-task.name
-#   branch = "main"
-#   commit_message = "managed by terraform"
-#   overwrite_on_create = true
-# }
 
 resource "aws_instance" "tf-docker-ec2" {
   ami = "ami-022e1a32d3f742bd8"
@@ -77,14 +42,13 @@ resource "aws_instance" "tf-docker-ec2" {
           docker build -t salihijk/quickdbtest .
           docker-compose up -d
           EOF
-  # depends_on = [github_repository_file.app-files]
 
 }
 
 resource "aws_security_group" "tf-docker-sec-gr" {
-  name = "docker-sec-gr-salihQuickDbTest"
+  name = "docker-sec-gr-QuickDbTest."
   tags = {
-    Name = "docker-sec-salihQuickDbTest"
+    Name = "docker-sec-QuickDbTest."
   }
   ingress {
     from_port   = 80
